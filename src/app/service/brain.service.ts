@@ -9,7 +9,7 @@ interface BrainRequest {
 
 @Injectable({ providedIn: 'root' })
 export class BrainService {
-  private apiUrl = 'http://localhost:5000/ask'; // your FastAPI endpoint
+  private apiUrl = 'http://localhost:5000/ask';
 
   constructor(private http: HttpClient) {}
 

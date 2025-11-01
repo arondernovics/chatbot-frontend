@@ -1,0 +1,39 @@
+function buildPrompt(userQuestion, detectedCategory) {
+
+  const normalizedQuestion = userQuestion.trim().toLowerCase();
+
+  // Meta questions about the bot itself
+  const metaQuestions = [
+    "who are you",
+    "what are you doing",
+    "what is your name",
+    "what can you do"
+  ];
+
+  if (metaQuestions.some(q => normalizedQuestion.includes(q))) {
+    return `
+You are a professional HR assistant chatbot built for employees of the company.
+Answer questions about yourself **in the first person** (e.g., "I am..."), but never greet the user.
+
+User's question: ${userQuestion}
+
+Your answer:
+    `;
+  }
+
+  // Otherwise, build normal HR prompt
+  const baseInstructions = `
+You are a helpful HR assistant.
+Use the provided company HR information to answer the employee’s question accurately and clearly.
+If the answer is not directly available, say “I’ll forward this question to HR support for clarification.”
+
+Relevant HR information:
+${categoryInfo[detectedCategory]}
+
+User's question: ${userQuestion}
+
+Your answer:
+  `;
+
+  return baseInstructions;
+}
